@@ -9,15 +9,15 @@ function clone {
     fi;
     if [ "$HOSTNAME" = *"door"* ]; then
         if [ ! -d "nfc_door" ]; then
-            git clone https://github.com/dethsanius/nfc_door.git
+            git clone https://github.com/InfectedLan/nfc_door.git
         fi
     fi; if [ "$HOSTNAME" = *"kafe"* ]; then
         if [ ! -d "nfc_kafe" ]; then
-            git clone https://github.com/dethsanius/nfc_kafe.git
+            git clone https://github.com/InfectedLan/nfc_kafe.git
         fi
     fi; if [ "$HOSTNAME" = *"checkin"* ]; then
         if [ ! -d "nfc_checkin" ]; then
-            git clone https://github.com/dethsanius/nfc_checkin.git
+            git clone https://github.com/InfectedLan/nfc_checkin.git
         fi
     fi
 }
