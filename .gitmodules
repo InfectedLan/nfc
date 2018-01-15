@@ -1,0 +1,3 @@
+[submodule "nfc_kafe"]
+	path = nfc_kafe
+	url = https://github.com/InfectedLan/nfc_kafe
