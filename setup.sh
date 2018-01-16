@@ -54,6 +54,16 @@ function uppdate {
 }
 
 function init {
+    pacman -Syu
+    if [ ! "$Hostname" = *"door"* ]; then
+        pacman -S xorg i3
+        echo "exec i3" > ~/.xinitrc
+    fi
+    cat ~/.profile > $prof
+    $expr = "exec ~/nfc_client/setup.sh"
+    if [ ! $prof = *$expr* ]; then
+        echo $expr >> ~/.profile
+    fi
     uppdate
     cd ~/
 }
