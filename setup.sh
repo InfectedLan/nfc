@@ -12,8 +12,8 @@ function clone {
             git clone https://github.com/InfectedLan/nfc_door.git
         fi
     fi; if [ "$HOSTNAME" = *"kafe"* ]; then
-        if [ ! -d "nfc_kafe" ]; then
-            git clone https://github.com/InfectedLan/nfc_kafe.git
+        if [ ! -d "kafe_client_nfc" ]; then
+            git clone https://github.com/InfectedLan/kafe_client_nfc.git
         fi
     fi; if [ "$HOSTNAME" = *"checkin"* ]; then
         if [ ! -d "nfc_checkin" ]; then
