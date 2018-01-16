@@ -2,10 +2,6 @@ function install {
     python setup.py install
     cd ..
 }
-function pullret {
-    git pull
-    cd ..
-}
 
 function uppdate {
     git pull > $pullMsg
@@ -24,33 +20,9 @@ function uppdate {
         git clone https://github.com/mxgxw/MFRC522-python.git
     else
         cd MFRC522-python
-        pullret
+        git pull
+        cd ..
     fi;
-    if [ "$HOSTNAME" = *"door"* ]; then
-        $door = "nfc_door"
-        if [ ! -d $door ]; then
-            git clone https://github.com/InfectedLan/$door.git
-        else
-            cd $door
-            pullret
-        fi
-    fi; if [ "$HOSTNAME" = *"kafe"* ]; then
-        $kafe = "kafe_client_nfc"
-        if [ ! -d $kafe ]; then
-            git clone https://github.com/InfectedLan/$kafe.git
-        else
-            cd $kafe
-            pullret
-        fi
-    fi; if [ "$HOSTNAME" = *"checkin"* ]; then
-        $checkin = "nfc_checkin"
-        if [ ! -d $checkin ]; then
-            git clone https://github.com/InfectedLan/$checkin.git
-        else
-            cd $checkin
-            pullret
-        fi
-    fi
 }
 
 function init {
@@ -65,5 +37,15 @@ function init {
         echo $expr >> ~/.profile
     fi
     uppdate
-    cd ~/
+}
+
+function run {
+    init
+    if [ "$HOSTNAME" = *"door"* ]; then
+        ~/nfc_client/src/door.py
+    fi; if [ "$HOSTNAME" = *"kafe"* ]; then
+        ~/nfc_client/src/kafe.py
+    fi; if [ "$HOSTNAME" = *"checkin"* ]; then
+        ~/nfc_client/src/checkin.py
+    fi
 }
