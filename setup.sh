@@ -26,9 +26,9 @@ function uppdate {
 }
 
 function init {
-    pacman -Syu
+    exec pacman -Syu --noconfirm
     if [ ! "$Hostname" = *"door"* ]; then
-        pacman -S xorg i3
+        exec pacman -S xorg i3 --noconfirm
         echo "exec i3" > ~/.xinitrc
     fi
     cat ~/.profile > $prof
