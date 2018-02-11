@@ -2,3 +2,5 @@ MFRC522-python
 SPI-Py
 *.swp
 configFiles/authorized_keys
+*.zip
+*.img

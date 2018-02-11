@@ -1,37 +1,25 @@
-sdp1="mmcblk0p1"
-sdp2="mmcblk0p2"
+sd="mmcblk0"
 startPath=$(pwd)
-if [ ! -d "/mnt/arm" ]; then
-    mkdir /mnt/arm
-fi
-cd /mnt/arm
-if [ ! -d "root" ]; then
-    mkdir root
-fi
-if [ ! -d "boot" ]; then
-    mkdir boot
-fi
 
-#Formatting and mounting boot
-mkfs.vfat /dev/$sdp1
-mount /dev/$sdp1 boot
-#Formatting and mounting root
-mkfs.ext4 /dev/$sdp2 -F
-mount /dev/$sdp2 root
+wget https://downloads.raspberrypi.org/raspbian_lite_latest -O raspbian_lite_latest.zip
+unzip -o raspbian_lite_latest.zip
 
-#Downloading and installing arch
-wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz -O ArchLinuxARM-rpi-3-latest.tar.gz
-bsdtar -xpf ArchLinuxARM-rpi-3-latest.tar.gz -C root
-sync
-mv root/boot/* boot
-sync
+dd bs=4M if=2017-11-29-raspbian-stretch-lite.img of=/dev/mmcblk0 conv=fsync
+mount /dev/$sd"p2" /mnt
+mount /dev/$sd"p1" /mnt/boot
+cd /mnt
 
 #Generating and adding configs
-cp $startPath/configFiles/su root/etc/pam.d/su -f
+cp $startPath/configFiles/su etc/pam.d/su -f
 cat ~/.ssh/id_rsa.pub > $startPath/configFiles/authorized_keys
-mkdir root/home/alarm/.ssh
-cp $startPath/configFiles/authorized_keys root/home/alarm/.ssh/
-echo "NFC-Client-setup" | sudo tee root/etc/hostname
+mkdir home/pi/.ssh
+cp $startPath/configFiles/authorized_keys home/pi/.ssh/
+echo "NFC-Client-setup" | tee etc/hostname
+echo "dtparam=i2c_arm=on" | tee -a boot/config.txt
+echo "dtparam=i2c=on" | tee -a boot/config.txt
+echo "dtparam=spi=on" | tee -a boot/config.txt
 
 #Unmounting
-umount boot root
+sync
+cd $startPath
+umount /mnt/boot /mnt
