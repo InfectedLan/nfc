@@ -18,6 +18,7 @@ echo "NFC-Client-setup" | tee etc/hostname
 echo "dtparam=i2c_arm=on" | tee -a boot/config.txt
 echo "dtparam=i2c=on" | tee -a boot/config.txt
 echo "dtparam=spi=on" | tee -a boot/config.txt
+touch boot/ssh
 
 #Unmounting
 sync
