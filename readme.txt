@@ -25,6 +25,10 @@ rst   22
 3.3v  17
 
 
+Requierments:
+https://github.com/mxgxw/MFRC522-python
+https://github.com/lthiery/SPI-Py
+
 Clone this repo
 Run setup.sh
 

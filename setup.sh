@@ -25,27 +25,13 @@ function uppdate {
     fi;
 }
 
-function init {
-    exec pacman -Syu --noconfirm
-    if [ ! "$Hostname" = *"door"* ]; then
-        exec pacman -S xorg i3 --noconfirm
-        echo "exec i3" > ~/.xinitrc
-    fi
-    cat ~/.profile > $prof
-    $expr = "exec ~/nfc_client/setup.sh"
-    if [ ! $prof = *$expr* ]; then
-        echo $expr >> ~/.profile
-    fi
-    uppdate
-}
-
 function run {
-    init
+    uppdate
     if [ "$HOSTNAME" = *"door"* ]; then
-        ~/nfc_client/src/door.py
+        python ./src/door.py
     fi; if [ "$HOSTNAME" = *"kafe"* ]; then
-        ~/nfc_client/src/kafe.py
+        python ./kafe.py
     fi; if [ "$HOSTNAME" = *"checkin"* ]; then
-        ~/nfc_client/src/checkin.py
+        python ./src/checkin.py
     fi
 }
