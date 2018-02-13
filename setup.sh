@@ -4,8 +4,9 @@ function install {
 }
 
 function uppdate {
-    git pull > $pullMsg
-    if [ ! $pullMsg = *"Already up tp date."*]; then
+    cd ~/nfc_client
+    git pull > pullMsg
+    if [ ! $pullMsg = *"Already up tp date."* ]; then
         exec setup.sh
         exit
     fi; if [ ! -d "SPI-Py" ]; then
@@ -35,3 +36,5 @@ function run {
         python ./src/checkin.py
     fi
 }
+
+run
