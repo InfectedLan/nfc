@@ -1,5 +1,5 @@
 function install {
-    python setup.py install
+    sudo python setup.py install
     cd ..
 }
 
