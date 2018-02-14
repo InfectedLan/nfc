@@ -4,6 +4,7 @@ from button import Button
 import RPi.GPIO as GPIO
 import MFRC522
 import urllib.request
+from io import StringIO
 
 # init curses screen
 screen = curses.initscr()
@@ -37,10 +38,11 @@ screens = [screen]
 #Creating usr screen
 usrscr = curses.newwin(5, width, 0, 0)
 screens.append(usrscr)
-
+pcbid = FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
 def fetchUser(uid):
     if uid != None:
-        return urllib.request.urlopen("http://example.com/foo/bar").read()
+        io = StringIO(urllib.request.urlopen("https://www.infected.no/api/rest/nfc/bong/fetch.php?pcbId=" + pcbid + "&cardId=" + uid).read())
+        return json.load(io)
     return None
 
 def useBong(usr, bong):
@@ -91,7 +93,7 @@ def uppdate():
 
         # If we have the UID, continue
         if status == MIFAREReader.MI_OK:
-            user = fetchUser(uid)
+            user = fetchUser("E004000000000000")
 
     # Use button
     ch = screen.getch() #Waits for key WAITING OPPERATION
