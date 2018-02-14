@@ -38,7 +38,7 @@ screens = [screen]
 #Creating usr screen
 usrscr = curses.newwin(5, width, 0, 0)
 screens.append(usrscr)
-pcbid = FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+pcbid = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0"
 def fetchUser(uid):
     if uid != None:
         io = StringIO(urllib.request.urlopen("https://www.infected.no/api/rest/nfc/bong/fetch.php?pcbId=" + pcbid + "&cardId=" + uid).read())

@@ -2,7 +2,7 @@ sudo su
 apt update
 apt full-upgrade -y
 apt install vim tmux git python-numpy python3-dev python-dev python-picamera -y
-apt install zbar-tools python-zbar libzbar0 libjpeg8-dev python-urllib3 python-imaging -y
+apt install zbar-tools python-zbar libzbar0 libjpeg8-dev python-requests python-imaging -y
 apt install lightdm xserver-xorg xinit xserver-xorg-video-fbdev -y
 apt install i3 -y
 
