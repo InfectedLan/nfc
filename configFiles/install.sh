@@ -9,6 +9,8 @@ apt install i3 -y
 "en_US.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 "LANG=en_US.UTF-8" > /etc/locale.conf
+export LC_ALL="en_US.UTF-8"
+locale-gen
 
 /etc/lightdm/lightdm.conf
 "tmux" >> .bashrc
