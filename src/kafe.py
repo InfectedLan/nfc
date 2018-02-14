@@ -3,7 +3,7 @@ import atexit
 from button import Button
 import RPi.GPIO as GPIO
 import MFRC522
-import urllib.request
+import urllib3.request
 from io import StringIO
 
 # init curses screen
