@@ -19,6 +19,7 @@ function uppdate {
         install
     fi; if [ ! -d "MFRC522-python" ]; then
         git clone https://github.com/mxgxw/MFRC522-python.git
+        cp ./MFRC522-python/MFRC522.py ./src/MFRC522.py
     else
         cd MFRC522-python
         git pull
