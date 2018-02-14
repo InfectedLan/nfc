@@ -3,6 +3,7 @@ import atexit
 from button import Button
 import RPi.GPIO as GPIO
 import MFRC522
+import urllib.request
 
 # init curses screen
 screen = curses.initscr()
@@ -39,7 +40,7 @@ screens.append(usrscr)
 
 def fetchUser(uid):
     if uid != None:
-        return {"name":"Sindre S Brurberg", "polser":2, "vafler":2, "brus":6, "mat":0}
+        return urllib.request.urlopen("http://example.com/foo/bar").read()
     return None
 
 def useBong(usr, bong):
@@ -60,6 +61,7 @@ def genButtonFunc(bong):
 #Initing button screen
 buttonWin = curses.newwin(15, width, 5, 0)
 screens.append(buttonWin)
+buttns = []
 
 #Initing buttons
 polser = Button(buttonWin, "polser", genButtonFunc("polser"), 0, 0)
@@ -79,16 +81,20 @@ def draw():
     for s in screens:
         s.refresh()
 
-def uppdate():
-    # Get the UID of the card
-    (status,uid) = MIFAREReader.MFRC522_Anticoll()
+mode = "loggin"
 
-    # If we have the UID, continue
-    if status == MIFAREReader.MI_OK:
-        user = fetchUser(uid)
+def uppdate():
+    if mode == "loggin":
+        # Get the UID of the card
+        (status,tagtype) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+        (status,uid) = MIFAREReader.MFRC522_Anticoll()
+
+        # If we have the UID, continue
+        if status == MIFAREReader.MI_OK:
+            user = fetchUser(uid)
 
     # Use button
-    ch = screen.getch()
+    ch = screen.getch() #Waits for key WAITING OPPERATION
     if ch == curses.KEY_MOUSE:
         (_,x,y,_,_) = curses.getmouse()
         for b in buttns:

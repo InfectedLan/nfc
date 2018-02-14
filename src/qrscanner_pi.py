@@ -1,19 +1,21 @@
 import zbar
+import picamera
 
-#Number is cameranumber
-cap = /dev/video0
 scanner = zbar.Scanner()
+with picamera.PiCamera() as camera:
+    stream = io.BytesIO()
+    for foo in camera.capture_continuous(stream, format='jpeg'):
+    # YOURS:  for frame in camera.capture_continuous(stream, format="bgr",  use_video_port=True):
+        # Truncate the stream to the current position (in case
+        # prior iterations output a longer image)
+        stream.truncate()
+        stream.seek(0)
+        if process(stream):
+            break
 
-while True:
-    ret, output = cap.read()
-    gray = cv2.cvtColor(output, cv2.COLOR_BGR2GRAY, dstCn=0)
-    cv2.imshow('output', output)
-    scan = scanner.scan(gray)
-    if scan:
-        print(scan)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        scan = scanner.scan(gray)
+        if scan:
+            print(scan)
 
 # Release everything if job is finished
-cap.release()
 cv2.destroyAllWindows()

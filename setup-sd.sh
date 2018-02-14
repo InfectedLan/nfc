@@ -17,6 +17,8 @@ mkdir home/pi/.ssh
 cp $startPath/configFiles/authorized_keys home/pi/.ssh/
 mkdir home/pi/.config/i3
 cp $startPath/configFiles/i3config home/pi/.config/i3/config
+mkdir etc/wpa_supplicant
+cp $startPath/configFiles/wpa_supplicant.conf etc/wpa_supplicant/
 echo "NFC-Client-setup" | tee etc/hostname
 echo "dtparam=i2c_arm=on" | tee -a boot/config.txt
 echo "dtparam=i2c=on" | tee -a boot/config.txt
