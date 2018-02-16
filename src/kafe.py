@@ -3,8 +3,9 @@ import atexit
 from button import Button
 import RPi.GPIO as GPIO
 import MFRC522
-import urllib3.request
-from io import StringIO
+import requests
+
+
 
 # init curses screen
 screen = curses.initscr()
